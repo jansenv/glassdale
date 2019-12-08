@@ -1,0 +1,43 @@
+body {
+    background-color: rgb(83, 83, 85);
+}
+
+.criminalsContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.criminal__info {
+    border: 1px solid black;
+    background-color: rgb(158, 143, 78);
+    margin: 20px 75px;
+    width: 225px;
+}
+
+.criminal__names {
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+.dropdown {
+    display: flex;
+    left: 40px;
+    top: 200px;    
+}
+
+.header__text {
+    background-color: rgb(9, 9, 73);
+    color: white;
+    font-size: 150px;
+    text-align: center;
+}
+
+.subheader__text {
+    background-color: black;
+    color: white;
+    font-size: 50px;
+    text-align: center;
+}
