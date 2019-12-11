@@ -1,5 +1,7 @@
+// Declare variable for list of crimes to be stored in
 let convictions = []
 
+// Fetch the data for crimes
 export const getConvictions = () => {
 
     console.log("I am going to fetch the convictions data")
@@ -16,4 +18,5 @@ export const getConvictions = () => {
         )
 }
 
+// Export the crimes data for use by other modules
 export const useConvictions = () => convictions
