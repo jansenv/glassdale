@@ -9,27 +9,12 @@ const CriminalListComponent = () => {
   const CriminalsCollection = useCriminals();
 
   eventHub.addEventListener("crimeSelected", event => {
-    /*
-    const selectedCrime = event.detail.crimeID;
-    const matchingCriminals = CriminalsCollection.filter(currentCriminals => {
-      if (currentCriminals.conviction === selectedCrime) {
-        return currentCriminals;
-      }
-    });
-
-    render(matchingCriminals)
-
-    */
-
-    
-    if("crimeID" in event.detail) {
       const matchingCriminals = CriminalsCollection.filter(currentCriminals => {
-        return currentCriminals.conviction
+        if (currentCriminals.conviction === event.detail.crimeID)
+        return currentCriminals
       })
       render(matchingCriminals);
-    }
-  
-  });
+    })
 
   let render = CriminalsCollection => {
     criminalHTML.innerHTML = `

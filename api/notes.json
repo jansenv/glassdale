@@ -1,0 +1,9 @@
+{
+    "notes": [
+        {
+            "text": "This is some example text that would appear in a note.",
+            "date": "12/10/2019",
+            "suspect": "Bart Simpson"
+        }
+    ]
+}
