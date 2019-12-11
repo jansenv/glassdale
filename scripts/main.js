@@ -3,9 +3,6 @@ import CriminalListComponent from "./criminals/CriminalListComponent.js";
 import { getConvictions } from "./convictions/ConvictionProvider.js";
 import ConvictionSelect from "./convictions/ConvictionSelect.js";
 import NoteFormComponent from "./notes/NoteForm.js";
-import SaveNoteComponent from "./notes/NoteList.js";
-
-SaveNoteComponent();
 
 NoteFormComponent();
 
