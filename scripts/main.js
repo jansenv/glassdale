@@ -4,17 +4,27 @@ import { getConvictions } from "./convictions/ConvictionProvider.js";
 import ConvictionSelect from "./convictions/ConvictionSelect.js";
 import NoteFormComponent from "./notes/NoteForm.js";
 import DialogComponent from "./dialog/Dialog.js";
+import WitnessListComponent from "./witnesses/WitnessListComponent.js";
+import { getWitnesses } from "./witnesses/WitnessProvider.js";
+
+getWitnesses().then(
+  () => {
+    WitnessListComponent()
+  }
+);
 
 //Render Note Form
 NoteFormComponent();
 
 //Get criminal data, then insert into Criminal List Component
-getCriminals().then(() => {
-  CriminalListComponent();
+getCriminals().then(
+  () => {
+  CriminalListComponent()
 });
 
 //Get crimes data, then insert into crimes dropdown component
-getConvictions().then(() => {
+getConvictions().then(
+  () => {
   ConvictionSelect();
 });
 

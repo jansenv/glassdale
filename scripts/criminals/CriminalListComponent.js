@@ -6,7 +6,7 @@ const eventHub = document.querySelector(".container");
 
 // Create Criminal List Component
 const CriminalListComponent = () => {
-  console.log("***I am the list component***");
+  console.log("***I am the criminal list component***");
   const contentTarget = document.querySelector(".criminalsContainer");
   const CriminalsCollection = useCriminals();
 
