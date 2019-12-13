@@ -8,7 +8,7 @@ const CriminalComponent = criminals => {
     <li>Term start: ${new Date(criminals.incarceration.start).toLocaleDateString('en-US')}</li>
     <li>Term end: ${new Date(criminals.incarceration.end).toLocaleDateString('en-US')}</li>
     </ul>
-    <button id="associates--${criminals.id}">Associate Alibis</button>
+    <button class="associatesButton" id="associates--${criminals.id}">Associate Alibis</button>
     </section>
     `
 }

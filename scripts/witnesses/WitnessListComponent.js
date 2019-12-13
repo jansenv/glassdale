@@ -5,7 +5,7 @@ const eventHub = document.querySelector(".container")
 
 const WitnessListComponent = () => {
 
-  const contentTarget = document.querySelector(".WitnessContainer");
+  const contentTarget = document.querySelector(".criminalsContainer");
   const WitnessCollection = useWitnesses();
 
   const render = () => {
