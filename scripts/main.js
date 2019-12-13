@@ -6,15 +6,23 @@ import NoteFormComponent from "./notes/NoteForm.js";
 import DialogComponent from "./dialog/Dialog.js";
 import WitnessListComponent from "./witnesses/WitnessListComponent.js";
 import { getWitnesses } from "./witnesses/WitnessProvider.js";
+import NotesListComponent from "./notes/NotesList.js";
+import { getNotes } from "./notes/NoteDataProvider.js";
+
+
+//Render Note Form
+getNotes().then(
+  () => {
+    NotesListComponent()
+  }
+)
+NoteFormComponent();
 
 getWitnesses().then(
   () => {
     WitnessListComponent()
   }
 );
-
-//Render Note Form
-NoteFormComponent();
 
 //Get criminal data, then insert into Criminal List Component
 getCriminals().then(

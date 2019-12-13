@@ -1,28 +1,3 @@
 {
-  "notes": [
-    {
-      "text": "test note",
-      "suspect": "mr. suspect",
-      "date": 1576095120136,
-      "id": 1
-    },
-    {
-      "text": "HEY!",
-      "suspect": "steve",
-      "date": 1576095248362,
-      "id": 2
-    },
-    {
-      "text": "test",
-      "suspect": "note",
-      "date": 1576095736638,
-      "id": 3
-    },
-    {
-      "text": "linux note test",
-      "suspect": "mr. ubuntu",
-      "date": 1576096665425,
-      "id": 4
-    }
-  ]
+  "notes": []
 }

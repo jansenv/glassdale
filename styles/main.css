@@ -1,9 +1,9 @@
 body {
     background-color: rgb(83, 83, 85);
+    color: white;
 }
 
 .criminalsContainer {
-    color: white;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -19,12 +19,10 @@ body {
 
 .criminal__names {
     background-color: black;
-    color: white;
     text-align: center;
 }
 
 .WitnessContainer {
-    color: white;
     display: flex;
     flex-wrap: wrap;
 }
@@ -44,14 +42,12 @@ body {
 
 .header__text {
     background-color: rgb(9, 9, 73);
-    color: white;
     font-size: 150px;
     text-align: center;
 }
 
 .subheader__text {
     background-color: black;
-    color: white;
     font-size: 50px;
     text-align: center;
 }
