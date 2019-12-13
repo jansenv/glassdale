@@ -1,18 +1,26 @@
-import { useWitnesses } from "./WitnessProvider.js"
-import WitnessComponent from "./WitnessComponent.js"
+import { useWitnesses } from "./WitnessProvider.js";
+import WitnessComponent from "./WitnessComponent.js";
+
+const eventHub = document.querySelector(".container")
 
 const WitnessListComponent = () => {
 
-    // Get a reference to the container the data will be stored in
-    const contentElement = document.querySelector(".witnessContainer")
-    const WitnessCollection = useWitnesses()
+  const contentTarget = document.querySelector(".WitnessContainer");
+  const WitnessCollection = useWitnesses();
 
-    // Add to the existing HTML in the content element
-    contentElement.innerHTML += `
-            ${WitnessCollection.map((currentWitness) => {
-                    return WitnessComponent(currentWitness)
-                }).join("")}
-                `
-            }
+  const render = () => {
+    contentTarget.innerHTML = `
+    ${WitnessCollection.map(currentWitness => {
+      return WitnessComponent(currentWitness);
+    }).join("")}
+    `;
+  };
 
-export default WitnessListComponent
+  eventHub.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id === "WitnessButton") {
+      render();
+    }
+  })
+};
+
+export default WitnessListComponent;

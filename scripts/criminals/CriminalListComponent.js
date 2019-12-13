@@ -22,7 +22,7 @@ const CriminalListComponent = () => {
   // When 'associate alibis' is clicked, broadcast a message to pop up a dialog box (dialog.js)
   eventHub.addEventListener("click", clickEvent => {
     if (clickEvent.target.id.startsWith("associates--")) {
-      // Capture both 'associates' and # in a single declaration
+      // Capture both 'associates' and id number in a single declaration
       const [prefix, id] = clickEvent.target.id.split("--")
       // Create custom event for message
       const message = new CustomEvent("associatesButtonClicked", {
