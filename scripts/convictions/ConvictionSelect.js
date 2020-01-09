@@ -17,7 +17,7 @@ import { useConvictions } from "./ConvictionProvider.js"
 
      //Target the crime selected by the user
      eventHub.addEventListener("change", changeEvent => {
-        if (changeEvent.target.classList.contains("dropdown")) {
+        if (changeEvent.target.id === "crimeSelect") {
             const selectedCrime = changeEvent.target.value
 
             //Create a custom event to store the crime selected

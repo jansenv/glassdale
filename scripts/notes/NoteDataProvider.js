@@ -1,48 +1,50 @@
 // Create a variable for notes to be stored in
-let notes = []
+let notes = [];
 
 // Fetch the notes
 export const getNotes = () => {
+  console.log("***I am fetching the notes***");
 
-    console.log("***I am fetching the notes***")
-
-    return fetch("http://localhost:3000/notes", {
-        method: "GET"
-    })
-        .then(response => response.json())
-        .then(
-            parsedNotes => {
-                console.log("***I have the notes***")
-                notes = parsedNotes.slice()
-            }
-        )
-}
+  return fetch("http://localhost:3000/notes", {
+    method: "GET"
+  })
+    .then(response => response.json())
+    .then(parsedNotes => {
+      console.log("***I have the notes***");
+      notes = parsedNotes.slice();
+    });
+};
 
 // Export the notes to be used
 export const useNotes = () => {
-    return notes
-}
-
+  return notes;
+};
 
 // Make a function that will save notes to json file
 export const saveNote = note => {
+  console.log("***I am saving the note***");
 
-    console.log("***I am saving the note***")
+  fetch("http://localhost:3000/notes", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(note)
+  }).then(getNotes);
+};
 
-    fetch("http://localhost:3000/notes", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(note)
-    })
-    
-    .then(getNotes)
-}
+export const editNote = noteObject => {
+  return fetch(`http://localhost:3000/notes/${noteObject.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(noteObject)
+  }).then(getNotes);
+};
 
 export const deleteNote = noteId => {
-    return fetch(`http://localhost:3000/notes/${noteId}`, {
-        method: "DELETE"
-    })
-        .then(getNotes)
-}
+  return fetch(`http://localhost:3000/notes/${noteId}`, {
+    method: "DELETE"
+  }).then(getNotes);
+};

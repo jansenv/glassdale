@@ -5,7 +5,13 @@ export const useOfficers = () => {
 }
 
 export const getOfficers = () => {
-    return fetch("http://criminals.glassdale.us/officers")
+    return fetch("http://criminals.glassdale.us/officers", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        }
+    })
         .then(response => response.json())
         .then(
             parsedOfficers => {

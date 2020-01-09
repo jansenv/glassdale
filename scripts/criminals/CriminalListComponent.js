@@ -1,4 +1,4 @@
-import { useCriminals } from "./CriminalProvider.js";
+import { useCriminals, getCriminalsByOfficer } from "./CriminalProvider.js";
 import CriminalComponent from "./CriminalComponent.js";
 
 // Declare event hub
@@ -10,14 +10,36 @@ const CriminalListComponent = () => {
   const contentTarget = document.querySelector(".criminalsContainer");
   const CriminalsCollection = useCriminals();
 
-  // Listen for the crimeSelected custom event from ConvictionSelect.js
-  eventHub.addEventListener("crimeSelected", event => {
-      const matchingCriminals = CriminalsCollection.filter(currentCriminals => {
-        if (currentCriminals.conviction === event.detail.crimeID)
-        return currentCriminals
-      })
-      render(matchingCriminals);
+  eventHub.addEventListener("filterClicked", event => {
+    const crimeName = event.detail.crime
+    const officerName = event.detail.officer
+
+    const filteredCriminals = CriminalsCollection.filter(
+      (individualCriminal) => {
+        if (individualCriminal.conviction === crimeName) {
+          return individualCriminal
+        }
+      }
+    )
+    .filter(criminal => {
+      if (criminal.arrestingOfficer === officerName) {
+        return criminal
+      }
     })
+
+    render(filteredCriminals)
+  })
+
+  // eventHub.addEventListener("officerSelected", event => {
+  //     if ("officerName" in event.detail) {
+  //       if (event.detail.officerName === "0") {
+  //         render(CriminalsCollection)
+  //       } else {
+  //         const filteredCriminals = getCriminalsByOfficer(event.detail.officerName)
+  //         render(filteredCriminals)
+  //       }
+  //     }
+  // })
 
   // When 'associate alibis' is clicked, broadcast a message to pop up a dialog box (dialog.js)
   eventHub.addEventListener("click", clickEvent => {

@@ -22,6 +22,12 @@ body {
     text-align: center;
 }
 
+.note {
+    border: 1px solid white;
+    max-width: 25%;
+    padding: 10px;
+}
+
 .WitnessContainer {
     display: flex;
     flex-wrap: wrap;

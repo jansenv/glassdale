@@ -1,4 +1,4 @@
-import { saveNote } from "./NoteDataProvider.js";
+import { saveNote, useNotes, editNote } from "./NoteDataProvider.js";
 
 // Target the element to be manipulated
 const contentTarget = document.querySelector(".noteFormContainer");
@@ -13,13 +13,65 @@ eventHub.addEventListener("click", clickEvent => {
   }
 })
 
-// Create Component
+// Handle internal element click
+eventHub.addEventListener("click", clickEvent => {
+  if (clickEvent.target.id === "saveNote") {
+    // Does the hidden input field have a value?
+    const hiddenInputValue = document.querySelector('#note-id').value
+
+    // If so, edit the note with a PUT operation
+    if (hiddenInputValue !== "") {
+      const editedNote = {
+        id: parseInt(document.querySelector("#note-id").value, 10),
+        text: document.querySelector("#note-text").value,
+        suspect: document.querySelector("#note-suspect").value,
+        date: Date.now()
+      }
+
+      editNote(editedNote).then(() => {
+        eventHub.dispatchEvent(new CustomEvent("noteHasBeenEdited"))
+      })
+    } else {
+      // Else, save the notes with a POST operation
+      const newNote = {
+        text: document.querySelector("#note-text").value,
+        suspect: document.querySelector("#note-suspect").value,
+        date: Date.now()
+      }
+      
+      saveNote(newNote).then(
+        () => {
+          const message = new CustomEvent("noteCreated")
+          eventHub.dispatchEvent(message)
+        }
+      )
+    }
+  }
+});
+
+eventHub.addEventListener("editButtonClicked", event => {
+  const noteToBeEdited = event.detail.noteId
+  const allNotesArray = useNotes()
+  const theFoundNote = allNotesArray.find(
+    (currentNoteObject) => {
+      return currentNoteObject.id === parseInt(noteToBeEdited, 10)
+    }
+  )
+
+  document.querySelector("#note-id").value = theFoundNote.id
+  document.querySelector("#note-text").value = theFoundNote.text
+  document.querySelector("#note-suspect").value = theFoundNote.suspect
+})
+
 const NoteFormComponent = () => {
   // Make function to render the component to the DOM
   const render = () => {
     contentTarget.innerHTML = `
         <details>
           <summary>Case Notes</summary>
+
+          <input type="hidden" id="note-id" />
+
           <div class="note__field">
               Note: <input type="text" id="note-text" />
           </div>
@@ -37,21 +89,6 @@ const NoteFormComponent = () => {
   render();
 
 
-  // Handle internal element click
-  eventHub.addEventListener("click", clickEvent => {
-    if (clickEvent.target.id === "saveNote") {
-
-      // Make a new object representation of a note
-      const newNote = {
-        text: document.querySelector("#note-text").value,
-        suspect: document.querySelector("#note-suspect").value,
-        date: Date.now()
-      };
-
-      // Change API state and application state
-      saveNote(newNote)
-    }
-  });
 };
 
 // Export component

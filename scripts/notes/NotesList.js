@@ -5,9 +5,9 @@ const eventHub = document.querySelector(".container")
 
 const NotesListComponent = () => {
 
-    eventHub.addEventListener("showNoteButtonClicked", event => {
-        const AllTheNotes = useNotes()
-        render (AllTheNotes)
+    eventHub.addEventListener("noteHasBeenEdited", event => {
+        const updatedNotes = useNotes()
+        render(updatedNotes)
     })
 
     eventHub.addEventListener("click", clickEvent => {
@@ -20,18 +20,47 @@ const NotesListComponent = () => {
                 }
             )
         }
+
+        if (clickEvent.target.id.startsWith("editNote--")) {
+            const [deletePrefix, noteId] = clickEvent.target.id.split("--")
+
+            const editEvent = new CustomEvent("editButtonClicked", {
+                detail: {
+                    noteId: noteId
+                }
+            })
+
+            eventHub.dispatchEvent(editEvent)
+        }
+    })
+
+    const renderNotesAgain = () => {
+        const allTheNotes = useNotes()
+        render(allTheNotes)
+
+    }
+
+    eventHub.addEventListener("noteCreated", event => {
+        renderNotesAgain()
+    })
+
+    eventHub.addEventListener("showNoteButtonClicked", event => {
+        renderNotesAgain()
     })
 
     const render = (notesCollection) => {
         contentTarget.innerHTML = notesCollection.map(
             (individualNote) => {
                 return `
-                    <h2>Cold Case Notes</h2>
                     <section class="note">
                         <div>${individualNote.suspect}</div>
                         <div>${individualNote.text}</div>
-                        <div>${individualNote.date}</div>
+                        <div>
+                            ${new Date(individualNote.date).toLocaleDateString("us-en")}
+                            ${new Date(individualNote.date).toLocaleTimeString("us-en")}
+                        </div>
                         <button id="deleteNote--${individualNote.id}">Delete</button>
+                        <button id="editNote--${individualNote.id}">Edit</button>
                     </section>
                 `
             }
